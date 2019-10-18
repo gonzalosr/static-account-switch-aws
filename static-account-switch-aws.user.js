@@ -37,7 +37,7 @@
     let csrf = switches.firstChild.firstChild.childNodes[6].value
     let redirectUri = switches.firstChild.firstChild.childNodes[7].value
     let numberOfSwitches = switches.childElementCount
-    let finalHTML = "";
+    let finalHTML = `<div class="awsc-account-display-section awsc-username-menu-section">Static Accounts</div>`;
 
     for(let i = 0; i < config.length; i++){
 
@@ -60,12 +60,12 @@
                 </form>
             </li>`;
 
-        finalHTML = finalHTML.concat(switchListElement)
+        finalHTML = finalHTML.concat(switchListElement);
 
     }
 
+    finalHTML = finalHTML.concat(`<div class="awsc-account-display-section awsc-username-menu-section"></div>`);
     let mySwitches=document.getElementById('awsc-username-menu-recent-roles');
     mySwitches.insertAdjacentHTML('beforeend',finalHTML);
-
 
 })();
