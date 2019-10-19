@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Static AWS account switch
 // @namespace    static.account.switch.aws.gonzalosr.com
-// @version      0.4
+// @version      0.5
 // @description  Set a group of accounts and roles as static in the AWS switch role history
 // @author       Gonzalo Sanchez Romero
 // @match        https://*console.aws.amazon.com/*
@@ -17,59 +17,59 @@
 'use strict';
 
 // Please don't edit this default config, won't persist across updates.
-// Load the script once in the AWS console, then go to Storage tab and edit them.
+// Load the script once in the AWS console, then reload this page, go to Storage tab and edit accounts.
 // You can add as many accounts as you like, required items are displayName, roleName and accountNumber
 
-const defaultConfig = `
-[
+const defaultConfig = [
     {
-        "displayName": "dev",
-        "roleName": "admin",
-        "accountNumber": "",
-        "mfaNeeded": "0",
-        "navColor": "14fc03",
-        "backgroundColor": "",
-        "labelIcon": "😁"
+       'displayName':'dev',
+       'roleName':'admin',
+       'accountNumber':'',
+       'mfaNeeded':'0',
+       'navColor':'14fc03',
+       'backgroundColor':'',
+       'labelIcon':'😁'
     },
     {
-        "displayName": "test",
-        "roleName": "admin",
-        "accountNumber": "",
-        "mfaNeeded": "0",
-        "navColor": "031cfc",
-        "backgroundColor": "",
-        "labelIcon": "🚀"
+       'displayName':'test',
+       'roleName':'admin',
+       'accountNumber':'',
+       'mfaNeeded':'0',
+       'navColor':'031cfc',
+       'backgroundColor':'',
+       'labelIcon':'🚀'
     },
     {
-        "displayName": "staging",
-        "roleName": "admin",
-        "accountNumber": "",
-        "mfaNeeded": "0",
-        "navColor": "fcba03",
-        "backgroundColor": "",
-        "labelIcon": "🚧"
+       'displayName':'staging',
+       'roleName':'admin',
+       'accountNumber':'',
+       'mfaNeeded':'0',
+       'navColor':'fcba03',
+       'backgroundColor':'',
+       'labelIcon':'🚧'
     },
     {
-        "displayName": "PROD",
-        "roleName": "admin",
-        "accountNumber": "",
-        "mfaNeeded": "0",
-        "navColor": "fc0303",
-        "backgroundColor": "",
-        "labelIcon": "🚨"
+       'displayName':'PROD',
+       'roleName':'admin',
+       'accountNumber':'',
+       'mfaNeeded':'0',
+       'navColor':'fc0303',
+       'backgroundColor':'',
+       'labelIcon':'🚨'
     }
-]
-`;
+];
 
 (async function() {
     let userConfig = await GM.getValue('userConfig');
 
     if (!userConfig) {
         userConfig = defaultConfig;
+        console.log("Couldn't read User config! Is this the first run?")
         GM.setValue('userConfig', userConfig);
     }
 
-    const config = JSON.parse(userConfig);
+    const config = userConfig;
+    console.log(config)
 
     let switches=document.getElementById('awsc-username-menu-recent-roles');
 
@@ -148,5 +148,3 @@ const defaultConfig = `
     }
 
 })();
-
-
