@@ -2,7 +2,7 @@
 // @name         Static AWS account switch
 // @namespace    static.account.switch.aws.gonzalosr.com
 // @version      0.3
-// @description  Set a group of accounts and roles as static in the AWS switch role history
+// @description  Set a group of accounts and roles as static in the AWS switch role history and change console header color to match the environment one
 // @author       Gonzalo Sanchez Romero
 // @match        https://*console.aws.amazon.com/*
 // @match        https://console.aws.amazon.com/*
