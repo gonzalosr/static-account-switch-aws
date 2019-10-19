@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Static AWS account switch
 // @namespace    static.account.switch.aws.gonzalosr.com
-// @version      0.1
+// @version      0.2
 // @description  Set a group of accounts and roles as static in the AWS switch role history
 // @author       Gonzalo Sanchez Romero
+// @match        https://*console.aws.amazon.com/*
 // @match        https://console.aws.amazon.com/*
 // @grant        GM.getValue
 // @grant        GM.setValue
@@ -15,14 +16,13 @@
 (function() {
     'use strict';
 
-
     const defaultConfig = `
-    [
-        { "displayName": "dev", "roleName": "admin", "accountNumber": "", "backgroundColor": "", "labelIcon": "😁" },
-        { "displayName": "test", "roleName": "admin", "accountNumber": "", "backgroundColor": "", "labelIcon": "🚀" },
-        { "displayName": "staging", "roleName": "admin", "accountNumber": "", "backgroundColor": "", "labelIcon": "🚧" },
-        { "displayName": "PROD", "roleName": "admin", "accountNumber": "", "backgroundColor": "", "labelIcon": "🚨" }
-    ]`;
+        [
+            { "displayName": "dev", "roleName": "admin", "accountNumber": "832875480452", "mfaNeeded": "0", "navColor": "14fc03", "backgroundColor": "", "labelIcon": "😁" },
+            { "displayName": "test", "roleName": "admin", "accountNumber": "573703332274", "mfaNeeded": "0", "navColor": "031cfc", "backgroundColor": "", "labelIcon": "🚀" },
+            { "displayName": "staging", "roleName": "admin", "accountNumber": "675078317756", "mfaNeeded": "0", "navColor": "fcba03", "backgroundColor": "", "labelIcon": "🚧" },
+            { "displayName": "PROD", "roleName": "admin", "accountNumber": "707624801137", "mfaNeeded": "0", "navColor": "fc0303", "backgroundColor": "", "labelIcon": "🚨" }
+        ]`;
 
     const config = JSON.parse(defaultConfig);
 
@@ -51,8 +51,8 @@
                     <input type="hidden" name="src" value="nav">
                     <input type="hidden" name="roleName" value="${ account.roleName }">
                     <input type="hidden" name="account" value="${ account.accountNumber }">
-                    <input type="hidden" name="mfaNeeded" value="0">
-                    <input type="hidden" name="color" value="B7CA9D">
+                    <input type="hidden" name="mfaNeeded" value="${ account.mfaNeeded }">
+                    <input type="hidden" name="color" value="${ account.navColor }">
                     <input type="hidden" name="csrf" value="${ csrf }">
                     <input type="hidden" name="redirect_uri" value="${ redirectUri }">
                     <label for="awsc-recent-role-switch-${ orderNumber }" class="awsc-role-color" style="background-color: ${ account.backgroundColor };">${ account.labelIcon }</label>
