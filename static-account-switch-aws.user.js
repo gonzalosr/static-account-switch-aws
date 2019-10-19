@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Static AWS account switch
 // @namespace    static.account.switch.aws.gonzalosr.com
-// @version      0.3
-// @description  Set a group of accounts and roles as static in the AWS switch role history and change console header color to match the environment one
+// @version      0.4
+// @description  Set a group of accounts and roles as static in the AWS switch role history
 // @author       Gonzalo Sanchez Romero
 // @match        https://*console.aws.amazon.com/*
 // @match        https://console.aws.amazon.com/*
@@ -13,18 +13,63 @@
 // @updateURL    https://raw.githubusercontent.com/gonzalosr/static-account-switch-aws/master/static-account-switch-aws.user.js
 // ==/UserScript==
 
-(function() {
-    'use strict';
 
-    const defaultConfig = `
-        [
-            { "displayName": "dev", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "14fc03", "backgroundColor": "", "labelIcon": "😁" },
-            { "displayName": "test", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "031cfc", "backgroundColor": "", "labelIcon": "🚀" },
-            { "displayName": "staging", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "fcba03", "backgroundColor": "", "labelIcon": "🚧" },
-            { "displayName": "PROD", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "fc0303", "backgroundColor": "", "labelIcon": "🚨" }
-        ]`;
+'use strict';
 
-    const config = JSON.parse(defaultConfig);
+// Please don't edit this default config, won't persist across updates.
+// Load the script once in the AWS console, then go to Storage tab and edit them.
+// You can add as many accounts as you like, required items are displayName, roleName and accountNumber
+
+const defaultConfig = `
+[
+    {
+        "displayName": "dev",
+        "roleName": "admin",
+        "accountNumber": "",
+        "mfaNeeded": "0",
+        "navColor": "14fc03",
+        "backgroundColor": "",
+        "labelIcon": "😁"
+    },
+    {
+        "displayName": "test",
+        "roleName": "admin",
+        "accountNumber": "",
+        "mfaNeeded": "0",
+        "navColor": "031cfc",
+        "backgroundColor": "",
+        "labelIcon": "🚀"
+    },
+    {
+        "displayName": "staging",
+        "roleName": "admin",
+        "accountNumber": "",
+        "mfaNeeded": "0",
+        "navColor": "fcba03",
+        "backgroundColor": "",
+        "labelIcon": "🚧"
+    },
+    {
+        "displayName": "PROD",
+        "roleName": "admin",
+        "accountNumber": "",
+        "mfaNeeded": "0",
+        "navColor": "fc0303",
+        "backgroundColor": "",
+        "labelIcon": "🚨"
+    }
+]
+`;
+
+(async function() {
+    let userConfig = await GM.getValue('userConfig');
+
+    if (!userConfig) {
+        userConfig = defaultConfig;
+        GM.setValue('userConfig', userConfig);
+    }
+
+    const config = JSON.parse(userConfig);
 
     let switches=document.getElementById('awsc-username-menu-recent-roles');
 
@@ -37,12 +82,13 @@
     let csrf = switches.firstChild.firstChild.childNodes[6].value
     let redirectUri = switches.firstChild.firstChild.childNodes[7].value
     let numberOfSwitches = switches.childElementCount
+    let listNumber = 0
     let finalHTML = `<div class="awsc-account-display-section awsc-username-menu-section">Static Accounts</div>`;
 
-    for(let i = 0; i < config.length; i++){
+    for(let key in config){
 
-        let account = config[i]
-        let orderNumber = numberOfSwitches + i
+        let account = config[key]
+        let orderNumber = numberOfSwitches + listNumber++
 
         let switchListElement=`
             <li id="awsc-recent-role-${ orderNumber }">
@@ -102,3 +148,5 @@
     }
 
 })();
+
+
