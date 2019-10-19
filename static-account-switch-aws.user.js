@@ -18,10 +18,10 @@
 
     const defaultConfig = `
         [
-            { "displayName": "dev", "roleName": "admin", "accountNumber": "832875480452", "mfaNeeded": "0", "navColor": "14fc03", "backgroundColor": "", "labelIcon": "😁" },
-            { "displayName": "test", "roleName": "admin", "accountNumber": "573703332274", "mfaNeeded": "0", "navColor": "031cfc", "backgroundColor": "", "labelIcon": "🚀" },
-            { "displayName": "staging", "roleName": "admin", "accountNumber": "675078317756", "mfaNeeded": "0", "navColor": "fcba03", "backgroundColor": "", "labelIcon": "🚧" },
-            { "displayName": "PROD", "roleName": "admin", "accountNumber": "707624801137", "mfaNeeded": "0", "navColor": "fc0303", "backgroundColor": "", "labelIcon": "🚨" }
+            { "displayName": "dev", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "14fc03", "backgroundColor": "", "labelIcon": "😁" },
+            { "displayName": "test", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "031cfc", "backgroundColor": "", "labelIcon": "🚀" },
+            { "displayName": "staging", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "fcba03", "backgroundColor": "", "labelIcon": "🚧" },
+            { "displayName": "PROD", "roleName": "admin", "accountNumber": "", "mfaNeeded": "0", "navColor": "fc0303", "backgroundColor": "", "labelIcon": "🚨" }
         ]`;
 
     const config = JSON.parse(defaultConfig);
