@@ -21,13 +21,13 @@ Once you have done that, edit the script in your userscript extension management
 
 ### Explained account config parameters
 
-- displayName: How the name will be displayed in the menu
-- roleName: the target role you are switching to
-- accountNumber: The AWS account number of the account you are switching to
-- mfaNeeded: `0` if not needed, `1` if it's required
-- navColor: The color for the navigation bar when you change to this role
-- backgroundColor: The background color for the menu icon (empty if you use an icon other than `&nbsp;`)
-- labelIcon: The icon for the menu element (AWS default is `&nbsp;`)
+- `displayName`: How the name will be displayed in the menu
+- `roleName`: the target role you are switching to
+- `accountNumber`: The AWS account number of the account you are switching to
+- `mfaNeeded`: `0` if not needed, `1` if it's required
+- `navColor`: The color for the navigation bar when you change to this role
+- `backgroundColor`: The background color for the menu icon (empty if you use an icon other than `&nbsp;`)
+- `labelIcon`: The icon for the menu element (AWS default is `&nbsp;`)
 
 
 ### Example config (2 role-account pairs)
