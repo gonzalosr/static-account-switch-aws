@@ -52,7 +52,7 @@ Once you have done that, edit the script in your userscript extension management
             "navColor": "031cfc",
             "backgroundColor": "",
             "labelIcon": "🚀"
-        },
+        }
 
     ]
 }
